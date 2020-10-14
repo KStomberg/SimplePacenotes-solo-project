@@ -2,7 +2,7 @@
 -- USER is a reserved keyword with Postgres
 -- You must use double quotes in every query that user is in:
 -- ex. SELECT * FROM "user";
--- Otherwise you will have errors!
+-- Otherwise you will have errors!;
 
 CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
@@ -25,6 +25,7 @@ CREATE TABLE "course" (
 	CREATE TYPE "turn_direction_enum" AS ENUM ('Left', 'Right');
 	
 	CREATE TABLE "pacenote" (
+	"id" SERIAL PRIMARY KEY,
 	"course_id" INT REFERENCES "course",
 	"turn_severity" "turn_severity_enum",
 	"cut_option" "cut_option_enum",
@@ -37,3 +38,18 @@ CREATE TABLE "course" (
 	"distance" INT,
 	"note" VARCHAR (500)
 	);
+
+    	INSERT INTO "pacenote" ("turn_severity", 
+							"cut_option", 
+							"continue_option", 
+							"turn_direction", 
+							"jump", 
+							"caution",
+						    "flat",
+							"loose",
+							"distance",
+							"note"
+						   )
+				VALUES (
+				'2', 'Cut', 'In', 'Left', 'true', 'false', 'true', 'false', 100, 'Test test test!'
+				);
