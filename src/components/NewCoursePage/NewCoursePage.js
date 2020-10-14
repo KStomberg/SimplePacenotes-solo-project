@@ -5,41 +5,43 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //Material-UI
 import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+
 
 import './NewCoursePage.css';
 
 
 
-function NewCoursePage() {
-  
-  const [turnSeverityState,  setTurnSeverityState] = React.useState();
-  const [intoState,  setIntoState] = React.useState();
-  const [cutState,  setCutState] = React.useState();
-  const [directionState,  setDirectionState] = React.useState();
+class NewCoursePage extends Component {
 
-
-  const handlerList = [
-    setTurnSeverityState,
-    setIntoState,
-    setCutState,
-    setDirectionState
-  ]
-
-  function getHandler(index) {
-    return (event, newState) => {
-      console.log(newState);
-      return handlerList[index](newState);
-    }
+  state= {
+    turnSeverity: '',
+    into: '',
+    cut: '',
+    direction: ''
   }
 
+  onChangeHandler = (event, propertyName) => {
+    console.log('Changing:', propertyName, event.target.value);
+    this.setState({
+      ...this.state,
+      [propertyName]: event.target.value
+    })
+  }
+
+  render() {
+    console.log('this.state:', this.state)
     return (
+      
       <div>
         <Grid container spacing={2} direction="column" alignItems="center">
           <Grid item>
             <p>Turn Severity</p>
-            <ToggleButtonGroup size="medium" value={turnSeverityState} exclusive onChange={getHandler(0)} >
+            <ToggleButtonGroup size="medium" value={this.state.turnSeverity} exclusive onChange={(event) => this.onChangeHandler(event, 'turnSeverity')} >
               <ToggleButton value="1">
                 <label>1</label>
               </ToggleButton>
@@ -60,12 +62,12 @@ function NewCoursePage() {
               </ToggleButton>
             </ToggleButtonGroup>
           </Grid>
-        </Grid>
+        
 
-        <Grid container spacing={2} direction="column" alignItems="center">
+        
           <Grid item>
             <p>Into?</p>
-            <ToggleButtonGroup size="medium" value={intoState} exclusive onChange={getHandler(1)}>
+            <ToggleButtonGroup size="medium" value={this.state.into} exclusive onChange={(event) => this.onChangeHandler(event, 'into')}>
               <ToggleButton value="into">
                 <label>Into</label>
               </ToggleButton>
@@ -77,12 +79,12 @@ function NewCoursePage() {
               </ToggleButton>
             </ToggleButtonGroup>
           </Grid>
-        </Grid>
+        
 
-        <Grid container spacing={2} direction="column" alignItems="center">
+        
           <Grid item>
             <p>Cut?</p>
-            <ToggleButtonGroup size="medium" value={cutState} exclusive onChange={getHandler(2)}>
+            <ToggleButtonGroup size="medium" value={this.state.cut} exclusive onChange={(event) => this.onChangeHandler(event, 'cut')}>
               <ToggleButton value="cut">
                 <label>Cut</label>
               </ToggleButton>
@@ -91,12 +93,12 @@ function NewCoursePage() {
               </ToggleButton>
             </ToggleButtonGroup>
           </Grid>
-        </Grid>
+     
 
-        <Grid container spacing={2} direction="column" alignItems="center">
+        
           <Grid item>
             <p>Direction</p>
-            <ToggleButtonGroup size="medium" value={directionState} exclusive onChange={getHandler(3)}>
+            <ToggleButtonGroup size="medium" value={this.state.direction} exclusive onChange={(event) => this.onChangeHandler(event, 'direction')}>
               <ToggleButton value="left">
                 <label>Left</label>
               </ToggleButton>
@@ -107,9 +109,21 @@ function NewCoursePage() {
           </Grid>
         </Grid>
 
-        <div id="miscOptionsContainer"></div>
+        <div id="miscOptionsContainer">
+            <Button variant='contained'>Jump</Button>
+            <Button variant='contained'>Loose/Slippy</Button>
+            <br></br>
+            <Button variant='contained'>Caution</Button>
+            <Button variant='contained'>Flat</Button>
+            <br></br>
+            <TextField id='distance' label='Distance (Meters)' variant='outlined' />
+            <br></br>
+            <TextField id='note' label='Notes' placeholder='You can come back to this later' multiline rows={4} variant='outlined' />
+            
+        </div>
       </div>
     );
   }
+}
 
 export default connect(mapStoreToProps)(NewCoursePage);
