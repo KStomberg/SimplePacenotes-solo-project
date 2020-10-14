@@ -23,38 +23,66 @@ class NewCoursePage extends Component {
 
               <p>Turn Severity</p>
 
-              <input type='radio' id='severityOne' name='turnSeverity' value='1' />
+              <input type='radio' class='radioStyle' id='severityOne' name='turnSeverity' value='1' />
               <label htmlFor='severityOne'>1</label>
               
-              <input type='radio' id='severityTwo' name='turnSeverity' value='2' />
+              <input type='radio' class='radioStyle' id='severityTwo' name='turnSeverity' value='2' />
               <label htmlFor='severityTwo'>2</label>
 
-              <input type='radio' id='severityThree' name='turnSeverity' value='3' />
+              <input type='radio' class='radioStyle' id='severityThree' name='turnSeverity' value='3' />
               <label htmlFor='severityThree'>3</label>
 
-              <input type='radio' id='severityFour' name='turnSeverity' value='4' />
+              <input type='radio' class='radioStyle' id='severityFour' name='turnSeverity' value='4' />
               <label htmlFor='severityFour'>4</label>
 
-              <input type='radio' id='severityFive' name='turnSeverity' value='5' />
+              <input type='radio' class='radioStyle' id='severityFive' name='turnSeverity' value='5' />
               <label htmlFor='severityFive'>5</label>
 
-              <input type='radio' id='severitySix' name='turnSeverity' value='6' />
+              <input type='radio' class='radioStyle' id='severitySix' name='turnSeverity' value='6' />
               <label htmlFor='severitySix'>6</label>
 
             </div>
 
 
-            <div id='cutOption'>
-              <p>Cut?</p>
+            <div id='cutOptionRadio'>
 
-                <input type='radio' id='selectedCut' name='cutOption' value='cut' />
+                <p>Cut?</p>
+
+                <input type='radio' class='radioStyle' id='selectedCut' name='cutOption' value='cut' />
                 <label htmlFor='selectedCut'>Cut</label>
 
-                <input type='radio' id='selectedRegular' name='cutOption' value='regular' />
+                <input type='radio' class='radioStyle' id='selectedRegular' name='cutOption' value='regular' />
                 <label htmlFor='selectedRegular'>Regular</label>
 
-                <input type='radio' id='selectedDontCut' name='cutOption' value='dontCut' />
+                <input type='radio' class='radioStyle' id='selectedDontCut' name='cutOption' value='dontCut' />
                 <label htmlFor='selectedDontCut'>Don't Cut</label>
+
+            </div>
+
+            <div id='intoOptionRadio'>
+
+              <p>Into?</p>
+
+              <input type='radio' class='radioStyle' id='selectedInto' name='intoOption' value='into' />
+              <label htmlFor='selectedInto'>Into</label>
+
+              <input type='radio' class='radioStyle' id='selectedThen' name='intoOption' value='Then' />
+              <label htmlFor='selectedThen'>Then</label>
+
+              <input type='radio' class='radioStyle' id='selectedAnd' name='intoOption' value='and' />
+              <label htmlFor='selectedAnd'>And</label>
+
+            </div>
+
+            <div id='directionOptionRadio'>
+
+              <p>Direction?</p>
+
+              <input type='radio' class='radioStyle' id='selectedLeft' name='directionOption' value='left' />
+              <label htmlFor='selectedLeft'>Left</label>
+
+              <input type='radio' class='radioStyle' id='selectedRight' name='directionOption' value='right' />
+              <label htmlFor='selectedRight'>Right</label>
 
             </div>
 
