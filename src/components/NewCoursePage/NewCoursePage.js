@@ -1,171 +1,115 @@
+//React
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
+//Material-UI
+import Grid from '@material-ui/core/Grid';
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+
 import './NewCoursePage.css';
 
-// Basic class component structure for React with default state
-// value setup. When making a new component be sure to replace
-// the component name TemplateClass with the name for the new
-// component.
-class NewCoursePage extends Component {
-  state = {
-    heading: 'Class Component',
-  };
 
-  render() {
+
+function NewCoursePage() {
+  
+  const [turnSeverityState,  setTurnSeverityState] = React.useState();
+  const [intoState,  setIntoState] = React.useState();
+  const [cutState,  setCutState] = React.useState();
+  const [directionState,  setDirectionState] = React.useState();
+
+
+  const handlerList = [
+    setTurnSeverityState,
+    setIntoState,
+    setCutState,
+    setDirectionState
+  ]
+
+  function getHandler(index) {
+    return (event, newState) => {
+      console.log(newState);
+      return handlerList[index](newState);
+    }
+  }
+
     return (
       <div>
-        <fieldset>
-          <div id="createTurnContainer">
-            <div id="turnSeverityRadio">
-              <p class='pDescriptor'>Turn Severity</p>
+        <Grid container spacing={2} direction="column" alignItems="center">
+          <Grid item>
+            <p>Turn Severity</p>
+            <ToggleButtonGroup size="medium" value={turnSeverityState} exclusive onChange={getHandler(0)} >
+              <ToggleButton value="1">
+                <label>1</label>
+              </ToggleButton>
+              <ToggleButton value="2">
+                <label>2</label>
+              </ToggleButton>
+              <ToggleButton value="3">
+                <label>3</label>
+              </ToggleButton>
+              <ToggleButton value="4">
+                <label>4</label>
+              </ToggleButton>
+              <ToggleButton value="5">
+                <label>5</label>
+              </ToggleButton>
+              <ToggleButton value="6">
+                <label>6</label>
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </Grid>
+        </Grid>
 
-              <input
-                type="radio"
-                class="radioStyle"
-                id="severityOne"
-                name="turnSeverity"
-                value="1"
-              />
-              <label htmlFor="severityOne">1</label>
+        <Grid container spacing={2} direction="column" alignItems="center">
+          <Grid item>
+            <p>Into?</p>
+            <ToggleButtonGroup size="medium" value={intoState} exclusive onChange={getHandler(1)}>
+              <ToggleButton value="into">
+                <label>Into</label>
+              </ToggleButton>
+              <ToggleButton value="then">
+                <label>Then</label>
+              </ToggleButton>
+              <ToggleButton value="and">
+                <label>And</label>
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </Grid>
+        </Grid>
 
-              <input
-                type="radio"
-                class="radioStyle"
-                id="severityTwo"
-                name="turnSeverity"
-                value="2"
-              />
-              <label htmlFor="severityTwo">2</label>
+        <Grid container spacing={2} direction="column" alignItems="center">
+          <Grid item>
+            <p>Cut?</p>
+            <ToggleButtonGroup size="medium" value={cutState} exclusive onChange={getHandler(2)}>
+              <ToggleButton value="cut">
+                <label>Cut</label>
+              </ToggleButton>
+              <ToggleButton value="dontCut">
+                <label>Don't Cut</label>
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </Grid>
+        </Grid>
 
-              <input
-                type="radio"
-                class="radioStyle"
-                id="severityThree"
-                name="turnSeverity"
-                value="3"
-              />
-              <label htmlFor="severityThree">3</label>
-
-              <input
-                type="radio"
-                class="radioStyle"
-                id="severityFour"
-                name="turnSeverity"
-                value="4"
-              />
-              <label htmlFor="severityFour">4</label>
-
-              <input
-                type="radio"
-                class="radioStyle"
-                id="severityFive"
-                name="turnSeverity"
-                value="5"
-              />
-              <label htmlFor="severityFive">5</label>
-
-              <input
-                type="radio"
-                class="radioStyle"
-                id="severitySix"
-                name="turnSeverity"
-                value="6"
-              />
-              <label htmlFor="severitySix">6</label>
-            </div>
-
-            <div id="cutOptionRadio">
-              <p class='pDescriptor'>Cut?</p>
-
-              <input
-                type="radio"
-                class="radioStyle"
-                id="selectedCut"
-                name="cutOption"
-                value="cut"
-              />
-              <label htmlFor="selectedCut">Cut</label>
-
-              <input
-                type="radio"
-                class="radioStyle"
-                id="selectedRegular"
-                name="cutOption"
-                value="regular"
-              />
-              <label htmlFor="selectedRegular">Regular</label>
-
-              <input
-                type="radio"
-                class="radioStyle"
-                id="selectedDontCut"
-                name="cutOption"
-                value="dontCut"
-              />
-              <label htmlFor="selectedDontCut">Don't Cut</label>
-            </div>
-
-            <div id="intoOptionRadio">
-              <p class='pDescriptor'>Into?</p>
-
-              <input
-                type="radio"
-                class="radioStyle"
-                id="selectedInto"
-                name="intoOption"
-                value="into"
-              />
-              <label htmlFor="selectedInto">Into</label>
-
-              <input
-                type="radio"
-                class="radioStyle"
-                id="selectedThen"
-                name="intoOption"
-                value="Then"
-              />
-              <label htmlFor="selectedThen">Then</label>
-
-              <input
-                type="radio"
-                class="radioStyle"
-                id="selectedAnd"
-                name="intoOption"
-                value="and"
-              />
-              <label htmlFor="selectedAnd">And</label>
-            </div>
-
-            <div id="directionOptionRadio">
-              <p class='pDescriptor'>Direction?</p>
-
-              <input
-                type="radio"
-                class="radioStyle"
-                id="selectedLeft"
-                name="directionOption"
-                value="left"
-              />
-              <label htmlFor="selectedLeft">Left</label>
-
-              <input
-                type="radio"
-                class="radioStyle"
-                id="selectedRight"
-                name="directionOption"
-                value="right"
-              />
-              <label htmlFor="selectedRight">Right</label>
-            </div>
-          </div>
-        </fieldset>
+        <Grid container spacing={2} direction="column" alignItems="center">
+          <Grid item>
+            <p>Direction</p>
+            <ToggleButtonGroup size="medium" value={directionState} exclusive onChange={getHandler(3)}>
+              <ToggleButton value="left">
+                <label>Left</label>
+              </ToggleButton>
+              <ToggleButton value="right">
+                <label>Right</label>
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </Grid>
+        </Grid>
 
         <div id="miscOptionsContainer"></div>
       </div>
     );
   }
-}
 
 export default connect(mapStoreToProps)(NewCoursePage);
