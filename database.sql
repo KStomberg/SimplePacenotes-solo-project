@@ -16,7 +16,15 @@ CREATE TABLE "course" (
 		"course_name" VARCHAR (250)
 	);
 
-
+	-- Obsolete for now
+	
+	-- CREATE TYPE "turn_severity_enum" AS ENUM ('1', '2', '3', '4', '5', '6');
+	
+	-- CREATE TYPE "cut_option_enum" AS ENUM ('Cut', 'Regular', 'Dont Cut');
+	
+	-- CREATE TYPE "continue_option_enum" AS ENUM ('In', 'Then', 'And');
+	
+	-- CREATE TYPE "turn_direction_enum" AS ENUM ('Left', 'Right');
 	
 		CREATE TABLE "pacenote" (
 	"id" SERIAL PRIMARY KEY,
