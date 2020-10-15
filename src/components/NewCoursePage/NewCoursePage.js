@@ -19,39 +19,44 @@ class NewCoursePage extends Component {
     into: '',
     cut: '',
     direction: '',
-    jump: false,
-    loose: false,
-    caution: false,
-    flat: false,
+    jump: '',
+    loose: '',
+    caution: '',
+    flat: '',
     distance: '',
     note: '',
   };
 
-  onChangeHandler = (event, propertyName) => {
-    console.log('Changing:', propertyName, event.target.value);
+  onChangeHandler = (value, propertyName) => {
+    console.log('Changing:', propertyName, value);
+    if (value === undefined) {
+      debugger;
+    }
     this.setState({
       ...this.state,
-      [propertyName]: event.target.value,
+      [propertyName]: value,
     });
   };
 
   booleanChangeHandler = (event, propertyName) => {
-    if (propertyName === false) {
-      this.setState({
-      ...this.state,
-      [propertyName]: true
-    })} else if (propertyName === true) {
+    if (this.propertyName.value === false) {
       this.setState({
         ...this.state,
-        [propertyName]: false
-      })}
+        [propertyName]: true,
+      });
+    } else if (this.propertyName.value === true) {
+      this.setState({
+        ...this.state,
+        [propertyName]: false,
+      });
+    }
     console.log('test', propertyName, event.target.value);
-  }
+  };
 
   stateTest = () => {
     console.log(this.state);
-    return this.state
-  }
+    return this.state;
+  };
 
   render() {
     console.log('this.state:', this.state);
@@ -66,9 +71,7 @@ class NewCoursePage extends Component {
                 size="medium"
                 value={this.state.turnSeverity}
                 exclusive
-                onClick={(event) =>
-                  this.onChangeHandler(event, 'turnSeverity')
-                }
+                onChange={(event, value) => this.onChangeHandler(value, 'turnSeverity')}
               >
                 <ToggleButton value="1">
                   <label>1</label>
@@ -97,7 +100,7 @@ class NewCoursePage extends Component {
                 size="medium"
                 value={this.state.into}
                 exclusive
-                onClick={(event) => this.onChangeHandler(event, 'into')}
+                onChange={(event, value) => this.onChangeHandler(value, 'into')}
               >
                 <ToggleButton value="into">
                   <label>Into</label>
@@ -117,7 +120,7 @@ class NewCoursePage extends Component {
                 size="medium"
                 value={this.state.cut}
                 exclusive
-                onClick={(event) => this.onChangeHandler(event, 'cut')}
+                onChange={(event, value) => this.onChangeHandler(value, 'cut')}
               >
                 <ToggleButton value="cut">
                   <label>Cut</label>
@@ -134,7 +137,7 @@ class NewCoursePage extends Component {
                 size="medium"
                 value={this.state.direction}
                 exclusive
-                onClick={(event) => this.onChangeHandler(event, 'direction')}
+                onChange={(event, value) => this.onChangeHandler(value, 'direction')}
               >
                 <ToggleButton value="left">
                   <label>Left</label>
@@ -149,11 +152,35 @@ class NewCoursePage extends Component {
 
         <div id="miscOptionsContainer">
           <p>Misc Options</p>
-          <Button variant="contained" value='jump' onClick={(event) => this.booleanChangeHandler(event, 'jump')}>Jump</Button>
-          <Button variant="contained" value='loose' onClick={(event) => this.booleanChangeHandler(event, 'loose')}>Loose/Slippy</Button>
+          <Button
+            variant="contained"
+            value="jump"
+            onClick={(event) => this.booleanChangeHandler(event, 'jump')}
+          >
+            Jump
+          </Button>
+          <Button
+            variant="contained"
+            value="loose"
+            onClick={(event) => this.booleanChangeHandler(event, 'loose')}
+          >
+            Loose/Slippy
+          </Button>
           <br></br>
-          <Button variant="contained" value='caution' onClick={(event) => this.booleanChangeHandler(event, 'caution')}>Caution</Button>
-          <Button variant="contained" value='flat' onClick={(event) => this.booleanChangeHandler(event, 'flat')}>Flat</Button>
+          <Button
+            variant="contained"
+            value="caution"
+            onClick={(event) => this.booleanChangeHandler(event, 'caution')}
+          >
+            Caution
+          </Button>
+          <Button
+            variant="contained"
+            value="flat"
+            onClick={(event) => this.booleanChangeHandler(event, 'flat')}
+          >
+            Flat
+          </Button>
           <br></br>
           <TextField
             id="distance"
