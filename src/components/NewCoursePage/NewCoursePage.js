@@ -76,6 +76,7 @@ class NewCoursePage extends Component {
       ...this.state,
       [propertyName]: !this.state.flat,
     });
+    this.clearState();
   };
 
   clearState = () => {
@@ -92,6 +93,15 @@ class NewCoursePage extends Component {
       distance: '',
       note: '',
     })
+  }
+
+  addPacenote =() => {
+    console.log('clicked submit button', this.state);
+    this.props.dispatch({
+      type: 'CREATE_PACENOTE',
+      payload: this.state
+    })
+
   }
 
   render() {
@@ -245,7 +255,7 @@ class NewCoursePage extends Component {
         </div>
 
         <div id='submitClearContainer'>
-          <Button variant='contained'>Submit</Button>
+          <Button variant='contained' onClick={this.addPacenote}>Submit Pacenote</Button>
           <Button variant='contained' onClick={this.clearState}>Clear all</Button>
         </div>
       </div>
