@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
+import CourseItem from '../CourseItem/CourseItem'
+import './CoursePage.css'
+
 
 class CoursePage extends Component {
 
@@ -18,10 +21,13 @@ class CoursePage extends Component {
   }
 
   render() {
-      console.log('json stringify', JSON.stringify(this.props));
+      console.log('json stringify', this.props.store.course.courseReducer);
     return (
-      <div>
-        <h2>Test</h2>
+      <div class='coursePage'>
+        <h2>List of all courses:</h2>
+        {this.props.store.course.courseReducer.map((course) => (
+            <CourseItem key={course.id} course={course} />
+        ))}
       </div>
     );
   }
