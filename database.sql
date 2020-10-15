@@ -24,18 +24,18 @@ CREATE TABLE "course" (
 	
 	CREATE TYPE "turn_direction_enum" AS ENUM ('Left', 'Right');
 	
-	CREATE TABLE "pacenote" (
+		CREATE TABLE "pacenote" (
 	"id" SERIAL PRIMARY KEY,
 	"course_id" INT REFERENCES "course",
-	"turn_severity" "turn_severity_enum",
-	"cut_option" "cut_option_enum",
-	"continue_option" "continue_option_enum",
-	"turn_direction" "turn_direction_enum",
+	"turn_severity" VARCHAR (1),
+	"cut_option" VARCHAR(8),
+	"continue_option" VARCHAR(4),
+	"turn_direction" VARCHAR (5),
 	"jump" BOOL,
 	"caution" BOOL,
 	"flat" BOOL,
 	"loose" BOOL,
-	"distance" INT,
+	"distance" VARCHAR(20),
 	"note" VARCHAR (500)
 	);
 
