@@ -19,7 +19,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import NewCoursePage from '../NewCoursePage/NewCoursePage';
-import CoursePage from '../CoursePage/CoursePage'
+import CoursePage from '../CoursePage/CoursePage';
 
 import './App.css';
 

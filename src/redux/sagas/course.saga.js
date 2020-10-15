@@ -1,14 +1,17 @@
-import { takeLatest } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* fetchCourseSaga(action) {
     console.log('in fetchCourseSaga');
 
     let response = yield axios({
-        method: 'get',
+        method: 'GET',
         url: '/api/course',
     });
-    //SET_COURSE GOES HERE
+    yield put({
+        type: 'SET_COURSE',
+        payload: response.data
+    });
 }
 
 function* pacenoteSaga() {
