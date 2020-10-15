@@ -19,10 +19,10 @@ class NewCoursePage extends Component {
     into: '',
     cut: '',
     direction: '',
-    jump: '',
-    loose: '',
-    caution: '',
-    flat: '',
+    jump: false,
+    loose: false,
+    caution: false,
+    flat: false,
     distance: '',
     note: '',
   };
@@ -38,31 +38,66 @@ class NewCoursePage extends Component {
     });
   };
 
-  booleanChangeHandler = (event, propertyName) => {
-    if (this.propertyName.value === false) {
-      this.setState({
-        ...this.state,
-        [propertyName]: true,
-      });
-    } else if (this.propertyName.value === true) {
-      this.setState({
-        ...this.state,
-        [propertyName]: false,
-      });
-    }
-    console.log('test', propertyName, event.target.value);
+  onTextChangeHandler = (event, propertyName) => {
+    console.log('Changing:', event, propertyName);
+    this.setState({
+      ...this.state,
+      [propertyName]: event.target.value
+    })
+  }
+
+  booleanChangeHandlerJump = (event, propertyName) => {
+    console.log('Changing:', event, propertyName);
+    this.setState({
+      ...this.state,
+      [propertyName]: !this.state.jump,
+    });
   };
 
-  stateTest = () => {
-    console.log(this.state);
-    return this.state;
+  booleanChangeHandlerLoose = (event, propertyName) => {
+    console.log('Changing:', event, propertyName);
+    this.setState({
+      ...this.state,
+      [propertyName]: !this.state.loose,
+    });
   };
+
+  booleanChangeHandlerCaution = (event, propertyName) => {
+    console.log('Changing:', event, propertyName);
+    this.setState({
+      ...this.state,
+      [propertyName]: !this.state.caution,
+    });
+  };
+
+  booleanChangeHandlerFlat = (event, propertyName) => {
+    console.log('Changing:', event, propertyName);
+    this.setState({
+      ...this.state,
+      [propertyName]: !this.state.flat,
+    });
+  };
+
+  clearState = () => {
+    console.log('clearState Clicked!');
+    this.setState({
+      turnSeverity: '',
+      into: '',
+      cut: '',
+      direction: '',
+      jump: false,
+      loose: false,
+      caution: false,
+      flat: false,
+      distance: '',
+      note: '',
+    })
+  }
 
   render() {
     console.log('this.state:', this.state);
     return (
       <div>
-        <button onClick={this.stateTest}>Test State</button>
         <div id="createTurnContainer">
           <Grid container spacing={2} direction="column" alignItems="center">
             <Grid item>
@@ -71,7 +106,9 @@ class NewCoursePage extends Component {
                 size="medium"
                 value={this.state.turnSeverity}
                 exclusive
-                onChange={(event, value) => this.onChangeHandler(value, 'turnSeverity')}
+                onChange={(event, value) =>
+                  this.onChangeHandler(value, 'turnSeverity')
+                }
               >
                 <ToggleButton value="1">
                   <label>1</label>
@@ -137,7 +174,9 @@ class NewCoursePage extends Component {
                 size="medium"
                 value={this.state.direction}
                 exclusive
-                onChange={(event, value) => this.onChangeHandler(value, 'direction')}
+                onChange={(event, value) =>
+                  this.onChangeHandler(value, 'direction')
+                }
               >
                 <ToggleButton value="left">
                   <label>Left</label>
@@ -155,14 +194,14 @@ class NewCoursePage extends Component {
           <Button
             variant="contained"
             value="jump"
-            onClick={(event) => this.booleanChangeHandler(event, 'jump')}
+            onClick={(event) => this.booleanChangeHandlerJump(event, 'jump')}
           >
             Jump
           </Button>
           <Button
             variant="contained"
             value="loose"
-            onClick={(event) => this.booleanChangeHandler(event, 'loose')}
+            onClick={(event) => this.booleanChangeHandlerLoose(event, 'loose')}
           >
             Loose/Slippy
           </Button>
@@ -170,14 +209,16 @@ class NewCoursePage extends Component {
           <Button
             variant="contained"
             value="caution"
-            onClick={(event) => this.booleanChangeHandler(event, 'caution')}
+            onClick={(event) =>
+              this.booleanChangeHandlerCaution(event, 'caution')
+            }
           >
             Caution
           </Button>
           <Button
             variant="contained"
             value="flat"
-            onClick={(event) => this.booleanChangeHandler(event, 'flat')}
+            onClick={(event) => this.booleanChangeHandlerFlat(event, 'flat')}
           >
             Flat
           </Button>
@@ -188,7 +229,7 @@ class NewCoursePage extends Component {
             variant="outlined"
             type="number"
             value={this.state.distance}
-            onChange={(event) => this.onChangeHandler(event, 'distance')}
+            onChange={(event) => this.onTextChangeHandler(event, 'distance')}
           />
           <br></br>
           <TextField
@@ -199,8 +240,13 @@ class NewCoursePage extends Component {
             rows={4}
             variant="outlined"
             value={this.state.note}
-            onChange={(event) => this.onChangeHandler(event, 'note')}
+            onChange={(event) => this.onTextChangeHandler(event, 'note')}
           />
+        </div>
+
+        <div id='submitClearContainer'>
+          <Button variant='contained'>Submit</Button>
+          <Button variant='contained' onClick={this.clearState}>Clear all</Button>
         </div>
       </div>
     );
