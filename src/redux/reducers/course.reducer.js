@@ -1,3 +1,5 @@
+import { combineReducers } from 'redux';
+
 const courseReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_COURSE':
@@ -6,3 +8,8 @@ const courseReducer = (state = [], action) => {
             return state;
     }
 };
+
+export default combineReducers({
+    courseReducer,
+  });
+  
