@@ -76,7 +76,6 @@ class NewCoursePage extends Component {
       ...this.state,
       [propertyName]: !this.state.flat,
     });
-    this.clearState();
   };
 
   clearState = () => {
@@ -101,7 +100,7 @@ class NewCoursePage extends Component {
       type: 'CREATE_PACENOTE',
       payload: this.state
     })
-
+    this.clearState();
   }
 
   render() {
