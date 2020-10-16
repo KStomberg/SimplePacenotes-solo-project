@@ -41,7 +41,9 @@ CREATE TABLE "course" (
 	"note" VARCHAR (500)
 	);
 
-    	INSERT INTO "pacenote" ("turn_severity", 
+    	INSERT INTO "pacenote" (
+							"course_id",
+							"turn_severity", 
 							"cut_option", 
 							"continue_option", 
 							"turn_direction", 
@@ -53,5 +55,5 @@ CREATE TABLE "course" (
 							"note"
 						   )
 				VALUES (
-				'2', 'Cut', 'In', 'Left', 'true', 'false', 'true', 'false', 100, 'Test test test!'
+				1, '2', 'Cut', 'In', 'Left', 'true', 'false', 'true', 'false', 100, 'Test test test!'
 				);

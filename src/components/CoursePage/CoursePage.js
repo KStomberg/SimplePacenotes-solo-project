@@ -45,7 +45,7 @@ class CoursePage extends Component {
         <h2>List of all courses:</h2>
         <Button variant='contained' onClick={this.addCoursePrompt}> New Course </Button>
         {this.props.store.course.courseReducer.map((course) => (
-            <CourseItem key={course.id} course={course} />
+            <CourseItem key={course.id} id={course.id} course={course} />
         ))}
       </div>
     );

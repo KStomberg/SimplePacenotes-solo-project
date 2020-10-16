@@ -2,6 +2,21 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
 
+router.get('/:id', (req, res) => {
+    console.log('Query param is', req.params);
+    const queryString = `	SELECT * FROM "pacenote" WHERE "course_id" = $1
+     ORDER BY "id" ASC;`;
+    pool
+        .query(queryString, [req.params.id])
+        .then((results) => {
+            res.send(results.rows);
+        })
+        .catch((error) => {
+            console.log('error in GET pacenote', error);
+            res.sendStatus(500);
+        });
+});
+
 router.post('/', (req, res) => {
     console.log(req.body);
     const pacenote = req.body;
