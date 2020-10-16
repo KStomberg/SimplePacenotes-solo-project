@@ -18,7 +18,7 @@ import UserPage from '../UserPage/UserPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import NewCoursePage from '../NewCoursePage/NewCoursePage';
+import EditCoursePage from '../EditCoursePage/EditCoursePage';
 import CoursePage from '../CoursePage/CoursePage';
 
 import './App.css';
@@ -66,8 +66,8 @@ class App extends Component {
             <ProtectedRoute
               // Logged in shows NewCoursePage else shows LoginPage
               exact
-              path="/newcourse"
-              component={NewCoursePage}
+              path="/editcourse"
+              component={EditCoursePage}
               />
 
             {/* When a value is supplied for the authRedirect prop the user will

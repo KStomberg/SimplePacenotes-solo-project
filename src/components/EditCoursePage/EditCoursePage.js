@@ -10,7 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
-import './NewCoursePage.css';
+import './EditCoursePage.css';
 
 class NewCoursePage extends Component {
   state = {
