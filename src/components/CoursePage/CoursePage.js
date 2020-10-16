@@ -21,7 +21,8 @@ class CoursePage extends Component {
       console.log('in getCourse');
 
       this.props.dispatch({
-          type: 'FETCH_COURSE'
+          type: 'FETCH_COURSE',
+          payload: this.props.store.user.id
       });
   }
 

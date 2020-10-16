@@ -6,7 +6,7 @@ function* fetchCourseSaga(action) {
 
     let response = yield axios({
         method: 'GET',
-        url: '/api/course',
+        url: `/api/course/${action.payload}`,
     });
     yield put({
         type: 'SET_COURSE',
