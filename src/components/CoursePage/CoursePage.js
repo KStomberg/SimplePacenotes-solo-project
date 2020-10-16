@@ -35,6 +35,7 @@ class CoursePage extends Component {
             newCourse: newCourse
         }
     })
+    this.getCourse();
   }
 
   render() {
