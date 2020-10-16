@@ -14,8 +14,19 @@ function* fetchCourseSaga(action) {
     });
 }
 
+function* createCourseSaga(action) {
+    console.log('in createCourseSaga, action.payload is:', action.payload);
+
+    yield axios({
+        method: 'POST',
+        url: '/api/course',
+        data: action.payload
+    });
+}
+
 function* pacenoteSaga() {
-    yield takeLatest('FETCH_COURSE', fetchCourseSaga)
+    yield takeLatest('FETCH_COURSE', fetchCourseSaga);
+    yield takeLatest('CREATE_COURSE', createCourseSaga); 
 }
 
 export default pacenoteSaga;
