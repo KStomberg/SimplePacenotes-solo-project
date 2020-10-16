@@ -16,6 +16,24 @@ router.get('/', (req, res) => {
         });
 });
 
+router.post('/', (req, res) => {
+    console.log('req.body:', req.body);
+
+    const insertCourseQuery = `
+    INSERT INTO "course" ("user_id", "course_name")
+    VALUES ($1, $2);`;
+    
+    pool
+        .query(insertCourseQuery, [req.body.userId, req.body.newCourse])
+        .then((results) => {
+            console.log('New course id:', results); 
+        })
+        .catch((error) => {
+            console.log('Error in POST course', error);
+            res.sendStatus(500);
+        });
+});
+
 
 // router.get('/:id', (req, res) => {
 //     console.log('Query param is:', req.params.id);

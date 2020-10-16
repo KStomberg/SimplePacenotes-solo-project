@@ -30,14 +30,17 @@ class CoursePage extends Component {
 
     this.props.dispatch({
         type: 'CREATE_COURSE',
-        payload: newCourse
+        payload: {
+            userId: this.props.store.user.id,
+            newCourse: newCourse
+        }
     })
   }
 
   render() {
-      console.log('log in render', this.props.store.course.courseReducer, 'state', this.state);
+      console.log('log in render', this.props.store, 'state', this.state);
     return (
-      <div class='coursePage'>
+      <div id='coursePage'>
         <h2>List of all courses:</h2>
         <Button variant='contained' onClick={this.addCoursePrompt}> New Course </Button>
         {this.props.store.course.courseReducer.map((course) => (
