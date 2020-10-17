@@ -14,6 +14,7 @@ import './EditCoursePage.css';
 
 class NewCoursePage extends Component {
   state = {
+    courseId: Number(this.props.match.params.id),
     turnSeverity: '',
     into: '',
     cut: '',
@@ -25,6 +26,17 @@ class NewCoursePage extends Component {
     distance: '',
     note: '',
   };
+
+  componentDidMount() {
+    let courseId= this.props.match.id;
+
+    if (courseId) {
+      this.props.dispatch({
+        type: 'FETCH_COURSE',
+        payload: courseId
+      });
+    }
+  }
 
   onChangeHandler = (value, propertyName) => {
     console.log('Changing:', propertyName, value);
@@ -80,6 +92,7 @@ class NewCoursePage extends Component {
   clearState = () => {
     console.log('clearState Clicked!');
     this.setState({
+      ...this.state, 
       turnSeverity: '',
       into: '',
       cut: '',
@@ -103,7 +116,7 @@ class NewCoursePage extends Component {
   }
 
   render() {
-    console.log('this.state:', this.state);
+    console.log('this.state:', this.state, 'this.props', this.props);
     return (
       <div>
         <div id="createTurnContainer">

@@ -23,6 +23,7 @@ router.post('/', (req, res) => {
     const insertPacenoteQuery = 
     `INSERT INTO "pacenote" 
     (
+    "course_id",
     "turn_severity", 
     "cut_option", 
     "continue_option", 
@@ -35,12 +36,13 @@ router.post('/', (req, res) => {
     "note"
    )
 VALUES (
-$1, $2, $3, $4, $5, $6, $7, $8, $9, $10
+$1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11
 )
 RETURNING "id";`;
 
 pool
     .query(insertPacenoteQuery, [
+        pacenote.courseId,
         pacenote.turnSeverity,
         pacenote.into,
         pacenote.cut,

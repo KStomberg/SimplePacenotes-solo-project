@@ -65,8 +65,7 @@ class App extends Component {
 
             <ProtectedRoute
               // Logged in shows NewCoursePage else shows LoginPage
-              exact
-              path="/editcourse"
+              path="/editcourse/:id"
               component={EditCoursePage}
               />
 
