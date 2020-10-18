@@ -1,9 +1,10 @@
 const express = require('express');
+const { query } = require('../modules/pool');
 const router = express.Router();
 const pool = require('../modules/pool');
 
 router.get('/:id', (req, res) => {
-    console.log('Query param is', req.params);
+    console.log('Query param for get pacenote is', req.params);
     const queryString = `	SELECT * FROM "pacenote" WHERE "course_id" = $1
      ORDER BY "id" ASC;`;
     pool
@@ -57,6 +58,24 @@ pool
     .then((result) => {
         console.log('New pacenote ID:', result.rows[0].id); //ID is here
     })
-})
+    .catch((error) => {
+        console.log('error in POST pacenote', error);
+        res.sendStatus(500);
+    });
+});
+
+router.delete('/:id', (req, res) => {
+    console.log('Query param for delete pacenote is', req.params);
+    const queryString = `DELETE FROM "pacenote" WHERE "id" = $1`
+    pool
+        .query(queryString, [req.params.id])
+        .then((result) => {
+            console.log('Result of delete:', result);
+        })
+        .catch((error) => {
+            console.error('Error in DELETE pacenote', error);
+            res.sendStatus(500);
+        });
+});
 
 module.exports = router;

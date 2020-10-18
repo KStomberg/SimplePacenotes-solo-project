@@ -11,6 +11,7 @@ import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
 import './EditCoursePage.css';
+import PacenoteItem from '../PacenoteItem/PacenoteItem';
 
 class NewCoursePage extends Component {
   state = {
@@ -28,27 +29,30 @@ class NewCoursePage extends Component {
   };
 
   componentDidMount() {
+    this.getCourse();
+    this.getPacenote();
+  }
+
+  getCourse = () => {
     let courseId = Number(this.props.match.params.id);
 
     if (courseId) {
       this.props.dispatch({
         type: 'FETCH_COURSE',
-        payload: courseId
+        payload: courseId,
       });
     }
-    this.getPacenote();
-  }
-
+  };
 
   getPacenote = () => {
     let courseId = Number(this.props.match.params.id);
-    console.log('fetching pacenote for course id:', courseId);
+    console.log('fetching pacenote of course id:', courseId);
 
     this.props.dispatch({
-      type: 'FETCH_COURSE',
+      type: 'FETCH_PACENOTE',
       payload: courseId,
-    })
-  }
+    });
+  };
 
   onChangeHandler = (value, propertyName) => {
     console.log('Changing:', propertyName, value);
@@ -65,9 +69,9 @@ class NewCoursePage extends Component {
     console.log('Changing:', event, propertyName);
     this.setState({
       ...this.state,
-      [propertyName]: event.target.value
-    })
-  }
+      [propertyName]: event.target.value,
+    });
+  };
 
   booleanChangeHandlerJump = (event, propertyName) => {
     console.log('Changing:', event, propertyName);
@@ -104,7 +108,7 @@ class NewCoursePage extends Component {
   clearState = () => {
     console.log('clearState Clicked!');
     this.setState({
-      ...this.state, 
+      ...this.state,
       turnSeverity: '',
       into: '',
       cut: '',
@@ -115,24 +119,30 @@ class NewCoursePage extends Component {
       flat: false,
       distance: '',
       note: '',
-    })
-  }
+    });
+  };
 
-  addPacenote =() => {
+  addPacenote = () => {
     console.log('clicked submit button', this.state);
     this.props.dispatch({
       type: 'CREATE_PACENOTE',
-      payload: this.state
-    })
+      payload: this.state,
+    });
     this.clearState();
-  }
+  };
 
   render() {
     console.log('this.state:', this.state, 'this.props', this.props);
     return (
       <div>
         <div id="displayPacenoteContainer">
-          
+          {this.props.store.pacenote.pacenoteReducer.map((pacenote) => (
+            <PacenoteItem
+              key={pacenote.id}
+              id={pacenote.id}
+              pacenote={pacenote}
+            />
+          ))}
         </div>
         <div id="createTurnContainer">
           <Grid container spacing={2} direction="column" alignItems="center">
@@ -280,9 +290,13 @@ class NewCoursePage extends Component {
           />
         </div>
 
-        <div id='submitClearContainer'>
-          <Button variant='contained' onClick={this.addPacenote}>Submit Pacenote</Button>
-          <Button variant='contained' onClick={this.clearState}>Clear all</Button>
+        <div id="submitClearContainer">
+          <Button variant="contained" onClick={this.addPacenote}>
+            Submit Pacenote
+          </Button>
+          <Button variant="contained" onClick={this.clearState}>
+            Clear all
+          </Button>
         </div>
       </div>
     );

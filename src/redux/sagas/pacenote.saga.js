@@ -22,11 +22,22 @@ function* createPacenoteSaga(action) {
         url: '/api/pacenote',
         data: action.payload,
     });
+    
+}
+
+function* deletePacenoteSaga(action) {
+    console.log('action.payload to send DB from deletePacenoteSaga', action.payload);
+
+    yield axios({
+        method: 'DELETE',
+        url: `/api/pacenote/${action.payload}`,
+    })
 }
 
 function* pacenoteSaga() {
     yield takeLatest('FETCH_PACENOTE', fetchPacenoteSaga)
     yield takeLatest('CREATE_PACENOTE', createPacenoteSaga)
+    yield takeLatest('DELETE_PACENOTE', deletePacenoteSaga)
 }
 
 export default pacenoteSaga;

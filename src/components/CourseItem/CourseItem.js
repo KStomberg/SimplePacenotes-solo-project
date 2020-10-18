@@ -8,15 +8,6 @@ import Button from '@material-ui/core/Button';
 
 class courseItem extends Component {
 
-    getPacenote = () => {
-        console.log('course to edit id:', this.props.course.id);
-
-        this.props.dispatch({
-            type: 'FETCH_PACENOTE',
-            payload: this.props.course.id
-        });
-    }
-
     editCourse = () => {
         console.log('course to edit id:', this.props.course.id);
         this.props.history.push(`/editcourse/${this.props.course.id}`)
