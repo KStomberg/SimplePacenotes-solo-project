@@ -28,7 +28,7 @@ class NewCoursePage extends Component {
   };
 
   componentDidMount() {
-    let courseId= this.props.match.id;
+    let courseId = Number(this.props.match.params.id);
 
     if (courseId) {
       this.props.dispatch({
@@ -36,6 +36,18 @@ class NewCoursePage extends Component {
         payload: courseId
       });
     }
+    this.getPacenote();
+  }
+
+
+  getPacenote = () => {
+    let courseId = Number(this.props.match.params.id);
+    console.log('fetching pacenote for course id:', courseId);
+
+    this.props.dispatch({
+      type: 'FETCH_COURSE',
+      payload: courseId,
+    })
   }
 
   onChangeHandler = (value, propertyName) => {
@@ -119,6 +131,9 @@ class NewCoursePage extends Component {
     console.log('this.state:', this.state, 'this.props', this.props);
     return (
       <div>
+        <div id="displayPacenoteContainer">
+          
+        </div>
         <div id="createTurnContainer">
           <Grid container spacing={2} direction="column" alignItems="center">
             <Grid item>
