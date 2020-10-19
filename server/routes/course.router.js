@@ -4,9 +4,9 @@ const pool = require('../modules/pool');
 
 router.get('/:id', (req, res) => {
     console.log('Query param is:', req.params);
-    const queryString = `SELECT * FROM "course" WHERE "user_id" = $1`
+    const getCourseQuery = `SELECT * FROM "course" WHERE "user_id" = $1`
     pool
-        .query(queryString, [req.params.id])
+        .query(getCourseQuery, [req.params.id])
         .then((results) => {
             res.send(results.rows);
         })

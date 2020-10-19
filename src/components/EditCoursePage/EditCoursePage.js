@@ -144,7 +144,7 @@ class NewCoursePage extends Component {
             />
           ))}
         </div>
-        <div id="createTurnContainer">
+        <div id="createPacenoteContainer">
           <Grid container spacing={2} direction="column" alignItems="center">
             <Grid item>
               <p>Turn Severity</p>

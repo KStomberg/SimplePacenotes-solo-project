@@ -22,6 +22,10 @@ function* createPacenoteSaga(action) {
         url: '/api/pacenote',
         data: action.payload,
     });
+
+    yield put ({
+        type: 'FETCH_PACENOTE'
+    })
     
 }
 
@@ -32,12 +36,31 @@ function* deletePacenoteSaga(action) {
         method: 'DELETE',
         url: `/api/pacenote/${action.payload}`,
     })
+
+    yield put ({
+        type: 'FETCH_PACENOTE'
+    })
+}
+
+function* updatePacenoteSaga(action) {
+    console.log('action.payload to send DB from updatePacenoteSaga', action.payload);
+
+    yield axios({
+        method: 'PUT',
+        url: '/api/pacenote',
+        data: action.payload,
+    });
+
+    yield put ({
+        type: 'FETCH_PACENOTE'
+    })
 }
 
 function* pacenoteSaga() {
     yield takeLatest('FETCH_PACENOTE', fetchPacenoteSaga)
     yield takeLatest('CREATE_PACENOTE', createPacenoteSaga)
     yield takeLatest('DELETE_PACENOTE', deletePacenoteSaga)
+    yield takeLatest('UPDATE_PACENOTE', updatePacenoteSaga)
 }
 
 export default pacenoteSaga;

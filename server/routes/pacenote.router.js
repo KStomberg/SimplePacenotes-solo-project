@@ -5,10 +5,10 @@ const pool = require('../modules/pool');
 
 router.get('/:id', (req, res) => {
     console.log('Query param for get pacenote is', req.params);
-    const queryString = `	SELECT * FROM "pacenote" WHERE "course_id" = $1
+    const getPacenoteQuery = `	SELECT * FROM "pacenote" WHERE "course_id" = $1
      ORDER BY "id" ASC;`;
     pool
-        .query(queryString, [req.params.id])
+        .query(getPacenoteQuery, [req.params.id])
         .then((results) => {
             res.send(results.rows);
         })
@@ -26,13 +26,13 @@ router.post('/', (req, res) => {
     (
     "course_id",
     "turn_severity", 
-    "cut_option", 
     "continue_option", 
+    "cut_option", 
     "turn_direction", 
     "jump", 
+    "loose",
     "caution",
     "flat",
-    "loose",
     "distance",
     "note"
    )
@@ -63,6 +63,44 @@ pool
         res.sendStatus(500);
     });
 });
+
+router.put('/', (req, res) => {
+    const pacenote = req.body
+    console.log(pacenote);
+    const updatePacenoteQuery = `
+    UPDATE "pacenote"
+	SET 
+		"turn_severity" = $1,
+		"continue_option" = $2,
+        "cut_option" = $3,
+		"turn_direction" = $4,
+		"jump" = $5,
+		"loose" = $6,
+		"caution" = $7,
+		"flat" = $8,
+		"distance" = $9,
+		"note" = $10
+    WHERE "id" = $11
+    `
+    pool
+        .query(updatePacenoteQuery, [
+            pacenote.turnSeverity,
+            pacenote.into,
+            pacenote.cut,
+            pacenote.direction,
+            pacenote.jump,
+            pacenote.loose,
+            pacenote.caution,
+            pacenote.flat,
+            pacenote.distance,
+            pacenote.note,
+            pacenote.id
+        ])
+        .catch((error) => {
+            console.log('error in POST pacenote', error);
+            res.sendStatus(500);
+        });
+})
 
 router.delete('/:id', (req, res) => {
     console.log('Query param for delete pacenote is', req.params);
