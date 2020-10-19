@@ -129,6 +129,7 @@ class NewCoursePage extends Component {
       payload: this.state,
     });
     this.clearState();
+    this.getPacenote();
   };
 
   render() {

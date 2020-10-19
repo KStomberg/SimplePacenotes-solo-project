@@ -7,45 +7,46 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import Button from '@material-ui/core/Button';
 
 //Script imports
-import CourseItem from '../CourseItem/CourseItem'
-import './CoursePage.css'
-
+import CourseItem from '../CourseItem/CourseItem';
+import './CoursePage.css';
 
 class CoursePage extends Component {
-
   componentDidMount() {
-      this.getCourse();
+    this.getCourse();
   }
 
   getCourse = () => {
-      console.log('in getCourse');
-
-      this.props.dispatch({
-          type: 'FETCH_COURSE',
-          payload: this.props.store.user.id
-      });
-  }
-
-  addCoursePrompt= () => {
-    let newCourse = prompt("Name of course?");
+    console.log('in getCourse');
 
     this.props.dispatch({
-        type: 'CREATE_COURSE',
-        payload: {
-            userId: this.props.store.user.id,
-            newCourse: newCourse
-        }
-    })
-  }
+      type: 'FETCH_COURSE',
+      payload: this.props.store.user.id,
+    });
+  };
+
+  addCoursePrompt = () => {
+    let newCourse = prompt('Name of course?');
+
+    this.props.dispatch({
+      type: 'CREATE_COURSE',
+      payload: {
+        userId: this.props.store.user.id,
+        newCourse: newCourse,
+      },
+    });
+  };
 
   render() {
-      console.log('log in render', this.props.store, 'state', this.state);
+    console.log('log in render', this.props.store, 'state', this.state);
     return (
-      <div id='coursePage'>
+      <div id="coursePage">
         <h2>List of all courses:</h2>
-        <Button variant='contained' onClick={this.addCoursePrompt}> New Course </Button>
+        <Button variant="contained" onClick={this.addCoursePrompt}>
+          {' '}
+          New Course{' '}
+        </Button>
         {this.props.store.course.courseReducer.map((course) => (
-            <CourseItem key={course.id} id={course.id} course={course} />
+          <CourseItem key={course.id} id={course.id} course={course} />
         ))}
       </div>
     );

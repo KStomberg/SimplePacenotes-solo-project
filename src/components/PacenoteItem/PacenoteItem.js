@@ -53,7 +53,7 @@ class PacenoteItem extends Component {
     });
 
     console.log('modal state', this.state.modalIsOpen);
-  }
+  };
 
   updatePacenote = () => {
     let pacenoteToUpdate = this.props.pacenote;
@@ -61,7 +61,7 @@ class PacenoteItem extends Component {
 
     this.props.dispatch({
       type: 'UPDATE_PACENOTE',
-      payload: this.state.pacenoteToEdit
+      payload: this.state.pacenoteToEdit,
     });
   };
 
@@ -84,8 +84,9 @@ class PacenoteItem extends Component {
       ...this.state,
       pacenoteToEdit: {
         ...this.state.pacenoteToEdit,
-      [propertyName]: value,
-    }});
+        [propertyName]: value,
+      },
+    });
   };
 
   onTextChangeHandler = (event, propertyName) => {
@@ -94,8 +95,9 @@ class PacenoteItem extends Component {
       ...this.state,
       pacenoteToEdit: {
         ...this.state.pacenoteToEdit,
-      [propertyName]: event.target.value,
-    }});
+        [propertyName]: event.target.value,
+      },
+    });
   };
 
   booleanChangeHandlerJump = (event, propertyName) => {
@@ -104,8 +106,9 @@ class PacenoteItem extends Component {
       ...this.state,
       pacenoteToEdit: {
         ...this.state.pacenoteToEdit,
-      [propertyName]: !this.state.pacenoteToEdit.jump,
-    }});
+        [propertyName]: !this.state.pacenoteToEdit.jump,
+      },
+    });
   };
 
   booleanChangeHandlerLoose = (event, propertyName) => {
@@ -114,8 +117,9 @@ class PacenoteItem extends Component {
       ...this.state,
       pacenoteToEdit: {
         ...this.state.pacenoteToEdit,
-      [propertyName]: !this.state.pacenoteToEdit.loose,
-    }});
+        [propertyName]: !this.state.pacenoteToEdit.loose,
+      },
+    });
   };
 
   booleanChangeHandlerCaution = (event, propertyName) => {
@@ -124,8 +128,9 @@ class PacenoteItem extends Component {
       ...this.state,
       pacenoteToEdit: {
         ...this.state.pacenoteToEdit,
-      [propertyName]: !this.state.pacenoteToEdit.caution,
-    }});
+        [propertyName]: !this.state.pacenoteToEdit.caution,
+      },
+    });
   };
 
   booleanChangeHandlerFlat = (event, propertyName) => {
@@ -134,11 +139,10 @@ class PacenoteItem extends Component {
       ...this.state,
       pacenoteToEdit: {
         ...this.state.pacenoteToEdit,
-      [propertyName]: !this.state.pacenoteToEdit.flat,
-    }});
+        [propertyName]: !this.state.pacenoteToEdit.flat,
+      },
+    });
   };
-
-
 
   render() {
     console.log('PacenoteItem state:', this.state);
@@ -162,7 +166,10 @@ class PacenoteItem extends Component {
           Delete
         </Button>
 
-        <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.setModalIsClosed}>
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onRequestClose={this.setModalIsClosed}
+        >
           <div id="editPacenoteContainer">
             <Grid container spacing={2} direction="column" alignItems="center">
               <Grid item>
@@ -258,68 +265,70 @@ class PacenoteItem extends Component {
             </Grid>
           </div>
           <div id="miscOptionsContainer">
-          <p>Misc Options</p>
-          <Button
-            variant="contained"
-            value="jump"
-            onClick={(event) => this.booleanChangeHandlerJump(event, 'jump')}
-          >
-            Jump
-          </Button>
-          <Button
-            variant="contained"
-            value="loose"
-            onClick={(event) => this.booleanChangeHandlerLoose(event, 'loose')}
-          >
-            Loose/Slippy
-          </Button>
-          <br></br>
-          <Button
-            variant="contained"
-            value="caution"
-            onClick={(event) =>
-              this.booleanChangeHandlerCaution(event, 'caution')
-            }
-          >
-            Caution
-          </Button>
-          <Button
-            variant="contained"
-            value="flat"
-            onClick={(event) => this.booleanChangeHandlerFlat(event, 'flat')}
-          >
-            Flat
-          </Button>
-          <br></br>
-          <TextField
-            id="distance"
-            label="Distance (Meters)"
-            variant="outlined"
-            type="number"
-            value={this.state.distance}
-            onChange={(event) => this.onTextChangeHandler(event, 'distance')}
-          />
-          <br></br>
-          <TextField
-            id="note"
-            label="Notes"
-            placeholder="You can come back to this later"
-            multiline
-            rows={4}
-            variant="outlined"
-            value={this.state.note}
-            onChange={(event) => this.onTextChangeHandler(event, 'note')}
-          />
-        </div>
+            <p>Misc Options</p>
+            <Button
+              variant="contained"
+              value="jump"
+              onClick={(event) => this.booleanChangeHandlerJump(event, 'jump')}
+            >
+              Jump
+            </Button>
+            <Button
+              variant="contained"
+              value="loose"
+              onClick={(event) =>
+                this.booleanChangeHandlerLoose(event, 'loose')
+              }
+            >
+              Loose/Slippy
+            </Button>
+            <br></br>
+            <Button
+              variant="contained"
+              value="caution"
+              onClick={(event) =>
+                this.booleanChangeHandlerCaution(event, 'caution')
+              }
+            >
+              Caution
+            </Button>
+            <Button
+              variant="contained"
+              value="flat"
+              onClick={(event) => this.booleanChangeHandlerFlat(event, 'flat')}
+            >
+              Flat
+            </Button>
+            <br></br>
+            <TextField
+              id="distance"
+              label="Distance (Meters)"
+              variant="outlined"
+              type="number"
+              value={this.state.distance}
+              onChange={(event) => this.onTextChangeHandler(event, 'distance')}
+            />
+            <br></br>
+            <TextField
+              id="note"
+              label="Notes"
+              placeholder="You can come back to this later"
+              multiline
+              rows={4}
+              variant="outlined"
+              value={this.state.note}
+              onChange={(event) => this.onTextChangeHandler(event, 'note')}
+            />
+          </div>
 
-        <div id="submitClearContainer">
-          <Button variant="contained" onClick={this.updatePacenote}>
-            Update Pacenote
-          </Button>
-          <Button variant="contained" onClick={this.setModalIsClosed}>
-            Cancel
-          </Button>
-        </div>
+          <div id="submitClearContainer">
+            <Button variant="contained" onClick={this.updatePacenote}>
+              Update Pacenote
+            </Button>
+            <Button variant="contained" onClick={this.setModalIsClosed}>
+              Cancel
+            </Button>
+          </div>
         </Modal>
       </div>
     );
