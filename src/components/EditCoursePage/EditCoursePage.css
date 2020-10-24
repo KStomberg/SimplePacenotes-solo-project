@@ -8,11 +8,9 @@
 
 #displayPacenoteContainer{
     text-align: center;
-    overflow: scroll;
-    width: 100%;
-    height: 200px;
+
 }
 
-/* #createPacenoteContainer {
-    text-align: right;
-} */
+#turnOptionContainer{
+    text-align: center;
+}

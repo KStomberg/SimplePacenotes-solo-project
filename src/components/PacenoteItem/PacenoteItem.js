@@ -4,6 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import Modal from 'react-modal';
 
 //Material-UI
+
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -61,7 +62,8 @@ class PacenoteItem extends Component {
 
     this.props.dispatch({
       type: 'UPDATE_PACENOTE',
-      payload: this.state.pacenoteToEdit,
+      payload: {pacenote: this.state.pacenoteToEdit,
+        courseId: pacenoteToUpdate.courseId}
     });
   };
 
@@ -71,7 +73,8 @@ class PacenoteItem extends Component {
 
     this.props.dispatch({
       type: 'DELETE_PACENOTE',
-      payload: pacenoteToDelete.id,
+      payload: {pacenoteId: pacenoteToDelete.id, 
+        courseId: pacenoteToDelete.course_id},
     });
   };
 

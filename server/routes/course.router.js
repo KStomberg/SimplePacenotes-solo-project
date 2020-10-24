@@ -2,7 +2,11 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
 
-router.get('/:id', (req, res) => {
+const {
+    rejectUnauthenticated,
+  } = require('../modules/authentication-middleware');
+
+router.get('/:id', rejectUnauthenticated, (req, res) => {
     console.log('Query param is:', req.params);
     const getCourseQuery = `SELECT * FROM "course" WHERE "user_id" = $1`
     pool
@@ -16,7 +20,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('req.body:', req.body);
 
     const insertCourseQuery = `

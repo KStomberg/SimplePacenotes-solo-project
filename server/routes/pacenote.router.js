@@ -3,7 +3,11 @@ const { query } = require('../modules/pool');
 const router = express.Router();
 const pool = require('../modules/pool');
 
-router.get('/:id', (req, res) => {
+const {
+    rejectUnauthenticated,
+  } = require('../modules/authentication-middleware');
+  
+router.get('/:id', rejectUnauthenticated, (req, res) => {
     console.log('Query param for get pacenote is', req.params);
     const getPacenoteQuery = `	SELECT * FROM "pacenote" WHERE "course_id" = $1
      ORDER BY "id" ASC;`;
@@ -18,7 +22,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     console.log(req.body);
     const pacenote = req.body;
     const insertPacenoteQuery = 
@@ -64,7 +68,7 @@ pool
     });
 });
 
-router.put('/', (req, res) => {
+router.put('/', rejectUnauthenticated, (req, res) => {
     const pacenote = req.body
     console.log(pacenote);
     const updatePacenoteQuery = `
@@ -102,13 +106,14 @@ router.put('/', (req, res) => {
         });
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
     console.log('Query param for delete pacenote is', req.params);
     const queryString = `DELETE FROM "pacenote" WHERE "id" = $1`
     pool
         .query(queryString, [req.params.id])
         .then((result) => {
             console.log('Result of delete:', result);
+            res.sendStatus(200);
         })
         .catch((error) => {
             console.error('Error in DELETE pacenote', error);

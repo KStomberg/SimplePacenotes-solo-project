@@ -2,7 +2,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* fetchPacenoteSaga(action) {
-  console.log('in fetchPacenoteSaga');
+  console.log('in fetchPacenoteSaga', action.payload);
 
   let response = yield axios({
     method: 'GET',
@@ -40,12 +40,12 @@ function* deletePacenoteSaga(action) {
 
   yield axios({
     method: 'DELETE',
-    url: `/api/pacenote/${action.payload}`,
+    url: `/api/pacenote/${action.payload.pacenoteId}`,
   });
-
+  console.log('Trying to FETCH_PACENOTE');
   yield put({
     type: 'FETCH_PACENOTE',
-    data: action.payload,
+    payload: action.payload.courseId,
   });
 }
 
@@ -58,12 +58,12 @@ function* updatePacenoteSaga(action) {
   yield axios({
     method: 'PUT',
     url: '/api/pacenote',
-    data: action.payload,
+    data: action.payload.pacenote,
   });
 
   yield put({
     type: 'FETCH_PACENOTE',
-    data: action.payload,
+    payload: action.payload.courseId,
   });
 }
 
