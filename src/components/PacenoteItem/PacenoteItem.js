@@ -147,20 +147,36 @@ class PacenoteItem extends Component {
     });
   };
 
+  turnRender = () => {
+    console.log(this.props.pacenote.turn_direction);
+    let turnDirection = '';
+    if (this.props.pacenote.turn_direction === 'left') {
+      turnDirection = 'L'
+    }
+    if (this.props.pacenote.turn_direction === 'right') {
+      turnDirection = 'R'
+    }
+    console.log(turnDirection);
+    return turnDirection;
+  }
+
+  emptyRender = () => {
+
+  }
+
   render() {
     console.log('PacenoteItem state:', this.state);
     return (
       <div>
-        <p>{this.props.pacenote.turn_severity}</p>
+        <p>{this.props.pacenote.turn_severity}{this.turnRender(this.props.pacenote.turn_direction)}</p>
         <p>{this.props.pacenote.continue_option}</p>
         <p>{this.props.pacenote.cut_option}</p>
-        <p>{this.props.pacenote.turn_direction}</p>
-        <p>{JSON.stringify(this.props.pacenote.jump)}</p>
-        <p>{JSON.stringify(this.props.pacenote.loose)}</p>
-        <p>{JSON.stringify(this.props.pacenote.caution)}</p>
-        <p>{JSON.stringify(this.props.pacenote.flat)}</p>
-        <p>{this.props.pacenote.distance}</p>
-        <p>{this.props.pacenote.note}</p>
+        <p>Jump: {JSON.stringify(this.props.pacenote.jump)}</p>
+        <p>Loose: {JSON.stringify(this.props.pacenote.loose)}</p>
+        <p>Caution: {JSON.stringify(this.props.pacenote.caution)}</p>
+        <p>Flat: {JSON.stringify(this.props.pacenote.flat)}</p>
+        <p>Distance (Meters):{this.props.pacenote.distance}</p>
+        <p>Notes: {this.props.pacenote.note}</p>
 
         <Button variant="contained" onClick={this.setModalIsOpen}>
           Edit
