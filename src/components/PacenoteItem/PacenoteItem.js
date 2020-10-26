@@ -65,6 +65,7 @@ class PacenoteItem extends Component {
       payload: {pacenote: this.state.pacenoteToEdit,
         courseId: pacenoteToUpdate.courseId}
     });
+    window.location.reload();
   };
 
   deletePacenote = () => {
@@ -160,9 +161,6 @@ class PacenoteItem extends Component {
     return turnDirection;
   }
 
-  emptyRender = () => {
-
-  }
 
   render() {
     console.log('PacenoteItem state:', this.state);
